@@ -8,14 +8,14 @@ export default function Footer() {
   return (
     <footer className="bg-[#2A1F15] text-[#E8D8B8]">
       {/* CF stripe at top */}
-      <div className="h-1 bg-gradient-to-r from-[#87CEEB] via-[#5BA3C9] to-[#87CEEB]" />
+      <div className="h-1" style={{ background: "linear-gradient(to right, #3CCDFC, #1AAAD4, #3CCDFC)" }} />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
           {/* Brand */}
           <div>
             <div className="flex items-center gap-3 mb-4">
-              <div className="w-10 h-10 rounded-full bg-[#87CEEB] border-2 border-[#5BA3C9] flex items-center justify-center flex-shrink-0">
+              <div className="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0" style={{ backgroundColor: "#3CCDFC", border: "2px solid #1AAAD4" }}>
                 <div className="flex flex-col items-center gap-0.5">
                   <div className="w-6 h-2.5 bg-white rounded-sm" />
                   <div className="w-6 h-1.5 bg-[#C9A84C] rounded-sm" />
@@ -55,14 +55,18 @@ export default function Footer() {
                 { href: "/", label: "Home" },
                 { href: "/about", label: "About the Companion Flag" },
                 { href: "/such-as", label: "Human Samenesses" },
+                { href: "/wall-of-flags", label: "A Flag for Every Flag" },
                 { href: "/self-test", label: "Is this idea for you?" },
                 { href: "/how-to-acquire", label: "How to Acquire a CF" },
+                { href: "/resources", label: "Resources & Links" },
                 { href: "/faq", label: "Frequently Asked Questions" },
                 { href: "/contact", label: "Contact Us" },
               ].map((link) => (
                 <Link key={link.href} href={link.href}>
                   <span
-                    className="text-sm text-[#B8A890] hover:text-[#87CEEB] transition-colors"
+                    className="text-sm text-[#B8A890] transition-colors"
+                    onMouseEnter={e => (e.currentTarget.style.color = '#3CCDFC')}
+                    onMouseLeave={e => (e.currentTarget.style.color = '')}
                     style={{ fontFamily: "'Raleway', sans-serif" }}
                   >
                     {link.label}
@@ -82,10 +86,12 @@ export default function Footer() {
             </h3>
             <div className="flex flex-col gap-3">
               <a
-                href="/manus-storage/cf-spec-sheet_18841a65.pdf"
+                href="/images/cf-spec-sheet.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 text-sm text-[#B8A890] hover:text-[#87CEEB] transition-colors"
+                className="flex items-center gap-2 text-sm text-[#B8A890] transition-colors"
+                onMouseEnter={e => (e.currentTarget.style.color = '#3CCDFC')}
+                onMouseLeave={e => (e.currentTarget.style.color = '')}
                 style={{ fontFamily: "'Raleway', sans-serif" }}
               >
                 <ExternalLink size={14} />
@@ -93,7 +99,9 @@ export default function Footer() {
               </a>
               <a
                 href="mailto:info@companionflag.org"
-                className="flex items-center gap-2 text-sm text-[#B8A890] hover:text-[#87CEEB] transition-colors"
+                className="flex items-center gap-2 text-sm text-[#B8A890] transition-colors"
+                onMouseEnter={e => (e.currentTarget.style.color = '#3CCDFC')}
+                onMouseLeave={e => (e.currentTarget.style.color = '')}
                 style={{ fontFamily: "'Raleway', sans-serif" }}
               >
                 <Mail size={14} />

@@ -103,7 +103,7 @@ export default function SelfTest() {
       <Navigation />
 
       {/* Page Header */}
-      <div className="pt-32 pb-16 relative" style={{ backgroundImage: `url(https://d2xsxph8kpxj0f.cloudfront.net/310519663344373217/Gt9L2E9sF7QsUjdxWiBePy/cf-hero-v2-cVgkMLJTXteqZtNer2dfLS.webp)`, backgroundSize: "cover", backgroundPosition: "center" }}>
+      <div className="pt-32 pb-16 relative" style={{ backgroundImage: `url(/manus-storage/cf-hero-v2_cdce503b.jpg)`, backgroundSize: "cover", backgroundPosition: "center" }}>
         <div className="absolute inset-0 bg-[#F5EDD6]/60" />
         <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <p className="text-sm tracking-[0.25em] uppercase text-[#8B6E4E] mb-3" style={{ fontFamily: "'Raleway', sans-serif", fontWeight: 500 }}>A Moment of Reflection</p>

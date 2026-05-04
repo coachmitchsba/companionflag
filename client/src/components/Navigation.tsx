@@ -10,8 +10,10 @@ const navLinks = [
   { href: "/", label: "Home" },
   { href: "/about", label: "About the CF" },
   { href: "/such-as", label: "Such as?" },
+  { href: "/wall-of-flags", label: "A Flag for Every Flag" },
   { href: "/self-test", label: "Is this for you?" },
   { href: "/how-to-acquire", label: "Acquire a CF" },
+  { href: "/resources", label: "Resources" },
   { href: "/faq", label: "FAQ" },
   { href: "/contact", label: "Contact" },
 ];
@@ -45,7 +47,7 @@ export default function Navigation() {
           <Link href="/">
             <div className="flex items-center gap-3 group">
               {/* CF Badge icon */}
-              <div className="w-9 h-9 rounded-full bg-[#87CEEB] border-2 border-[#5BA3C9] flex items-center justify-center shadow-sm flex-shrink-0">
+              <div className="w-9 h-9 rounded-full flex items-center justify-center shadow-sm flex-shrink-0" style={{ backgroundColor: "#3CCDFC", border: "2px solid #1AAAD4" }}>
                 <div className="flex flex-col items-center gap-0.5">
                   <div className="w-5 h-2 bg-white rounded-sm border border-[#5BA3C9]/30" />
                   <div className="w-5 h-1 bg-[#C9A84C] rounded-sm" />
@@ -53,7 +55,9 @@ export default function Navigation() {
               </div>
               <div>
                 <div
-                  className="text-lg leading-tight text-[#3D2B1F] group-hover:text-[#5BA3C9] transition-colors"
+                  className="text-lg leading-tight text-[#3D2B1F] transition-colors"
+                  onMouseEnter={e => (e.currentTarget.style.color = '#3CCDFC')}
+                  onMouseLeave={e => (e.currentTarget.style.color = '')}
                   style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontWeight: 600 }}
                 >
                   The Companion Flag
@@ -75,10 +79,12 @@ export default function Navigation() {
                 <span
                   className={`px-3 py-1.5 text-sm transition-colors rounded-sm ${
                     location === link.href
-                      ? "text-[#5BA3C9] font-semibold"
-                      : "text-[#5C4033] hover:text-[#5BA3C9]"
+                      ? "font-semibold"
+                      : "text-[#5C4033]"
                   }`}
-                  style={{ fontFamily: "'Raleway', sans-serif", fontWeight: location === link.href ? 600 : 400 }}
+                  style={{ fontFamily: "'Raleway', sans-serif", fontWeight: location === link.href ? 600 : 400, color: location === link.href ? '#3CCDFC' : undefined }}
+                  onMouseEnter={e => { if (location !== link.href) (e.currentTarget as HTMLElement).style.color = '#3CCDFC'; }}
+                  onMouseLeave={e => { if (location !== link.href) (e.currentTarget as HTMLElement).style.color = ''; }}
                 >
                   {link.label}
                 </span>
@@ -88,7 +94,9 @@ export default function Navigation() {
 
           {/* Mobile toggle */}
           <button
-            className="lg:hidden p-2 text-[#3D2B1F] hover:text-[#5BA3C9] transition-colors"
+            className="lg:hidden p-2 text-[#3D2B1F] transition-colors"
+            onMouseEnter={e => (e.currentTarget.style.color = '#3CCDFC')}
+            onMouseLeave={e => (e.currentTarget.style.color = '')}
             onClick={() => setMobileOpen(!mobileOpen)}
             aria-label="Toggle menu"
           >
@@ -106,10 +114,12 @@ export default function Navigation() {
                 <span
                   className={`block px-3 py-2.5 text-sm rounded transition-colors ${
                     location === link.href
-                      ? "text-[#5BA3C9] bg-[#E8D8B8] font-semibold"
-                      : "text-[#5C4033] hover:text-[#5BA3C9] hover:bg-[#EDE3CC]"
+                      ? "bg-[#E8D8B8] font-semibold"
+                      : "text-[#5C4033] hover:bg-[#EDE3CC]"
                   }`}
-                  style={{ fontFamily: "'Raleway', sans-serif" }}
+                  style={{ fontFamily: "'Raleway', sans-serif", color: location === link.href ? '#3CCDFC' : undefined }}
+                  onMouseEnter={e => { if (location !== link.href) (e.currentTarget as HTMLElement).style.color = '#3CCDFC'; }}
+                  onMouseLeave={e => { if (location !== link.href) (e.currentTarget as HTMLElement).style.color = ''; }}
                 >
                   {link.label}
                 </span>

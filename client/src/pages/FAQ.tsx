@@ -1,6 +1,7 @@
 /* FAQ Page — Companion Flag "Warm Globe" Design */
 
 import { useState, useEffect, useRef } from "react";
+import { Link } from "wouter";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { ChevronDown } from "lucide-react";
@@ -17,7 +18,7 @@ function FadeInSection({ children, delay = 0 }: { children: React.ReactNode; del
   return <div ref={ref} className="fade-in-up" style={{ transitionDelay: `${delay}ms` }}>{children}</div>;
 }
 
-const faqs = [
+const faqs: { q: string; a: React.ReactNode }[] = [
   {
     q: "What exactly is the Companion Flag?",
     a: "The Companion Flag is a simple, elegant flag — a bright white field with a single-colored stripe across the top — that is flown directly below another flag (called the 'host flag') on the same pole. It is a symbol of all that human beings share in common, regardless of nationality, culture, religion, or any other difference.",
@@ -44,7 +45,19 @@ const faqs = [
   },
   {
     q: "How do I get a Companion Flag?",
-    a: "The CF can be made by any flag maker using the simple specifications on our Spec Sheet (available for free download on the 'Acquire a CF' page). You can take the Spec Sheet to a local flag shop, make one yourself, or contact us for a list of recommended flag makers.",
+    a: (
+      <>
+        The CF can be made by any flag maker using the simple specifications on our Spec Sheet (available for free download on the{" "}
+        <Link href="/how-to-acquire">
+          <span className="text-[#5BA3C9] hover:underline cursor-pointer">Acquire a CF</span>
+        </Link>{" "}
+        page). You can take the Spec Sheet to a local flag shop, make one yourself, or{" "}
+        <Link href="/contact">
+          <span className="text-[#5BA3C9] hover:underline cursor-pointer">contact us</span>
+        </Link>{" "}
+        for a list of recommended flag makers.
+      </>
+    ),
   },
   {
     q: "How much does a Companion Flag cost?",
@@ -68,7 +81,7 @@ const faqs = [
   },
 ];
 
-function FAQItem({ q, a, index }: { q: string; a: string; index: number }) {
+function FAQItem({ q, a }: { q: string; a: React.ReactNode }) {
   const [open, setOpen] = useState(false);
   return (
     <div className="border-b" style={{ borderColor: "#D4C4A0" }}>
@@ -76,13 +89,10 @@ function FAQItem({ q, a, index }: { q: string; a: string; index: number }) {
         onClick={() => setOpen(!open)}
         className="w-full text-left py-5 flex items-start justify-between gap-4 group"
       >
-        <span
+          <span
           className="text-lg text-[#3D2B1F] group-hover:text-[#5BA3C9] transition-colors leading-snug"
           style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontWeight: 500 }}
         >
-          <span className="text-[#C9A84C] mr-2" style={{ fontFamily: "'Raleway', sans-serif", fontSize: "0.8rem", fontWeight: 600 }}>
-            {String(index + 1).padStart(2, "0")}
-          </span>
           {q}
         </span>
         <ChevronDown
@@ -93,9 +103,9 @@ function FAQItem({ q, a, index }: { q: string; a: string; index: number }) {
       <div
         className={`overflow-hidden transition-all duration-300 ${open ? "max-h-96 pb-5" : "max-h-0"}`}
       >
-        <p className="text-[#5C4033] leading-relaxed pl-8" style={{ fontFamily: "'Lora', Georgia, serif" }}>
+        <div className="text-[#5C4033] leading-relaxed pl-8" style={{ fontFamily: "'Lora', Georgia, serif" }}>
           {a}
-        </p>
+        </div>
       </div>
     </div>
   );
@@ -105,7 +115,7 @@ export default function FAQ() {
   return (
     <div className="min-h-screen" style={{ backgroundColor: "#F5EDD6" }}>
       <Navigation />
-      <div className="pt-32 pb-16 relative" style={{ backgroundImage: `url(https://d2xsxph8kpxj0f.cloudfront.net/310519663344373217/Gt9L2E9sF7QsUjdxWiBePy/cf-hero-v2-cVgkMLJTXteqZtNer2dfLS.webp)`, backgroundSize: "cover", backgroundPosition: "center" }}>
+      <div className="pt-32 pb-16 relative" style={{ backgroundImage: `url(/manus-storage/cf-hero-v2_cdce503b.jpg)`, backgroundSize: "cover", backgroundPosition: "center" }}>
         <div className="absolute inset-0 bg-[#F5EDD6]/60" />
         <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <p className="text-sm tracking-[0.25em] uppercase text-[#8B6E4E] mb-3" style={{ fontFamily: "'Raleway', sans-serif", fontWeight: 500 }}>Common Questions</p>
@@ -124,7 +134,7 @@ export default function FAQ() {
         <FadeInSection delay={100}>
           <div>
             {faqs.map((faq, i) => (
-              <FAQItem key={i} q={faq.q} a={faq.a} index={i} />
+              <FAQItem key={i} q={faq.q} a={faq.a} />
             ))}
           </div>
         </FadeInSection>

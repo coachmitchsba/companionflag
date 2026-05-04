@@ -11,6 +11,8 @@ import HowToAcquire from "./pages/HowToAcquire";
 import FAQ from "./pages/FAQ";
 import Contact from "./pages/Contact";
 import SelfTest from "./pages/SelfTest";
+import Resources from "./pages/Resources";
+import WallOfFlags from "./pages/WallOfFlags";
 
 function Router() {
   return (
@@ -22,6 +24,8 @@ function Router() {
       <Route path="/faq" component={FAQ} />
       <Route path="/contact" component={Contact} />
       <Route path="/self-test" component={SelfTest} />
+      <Route path="/resources" component={Resources} />
+      <Route path="/wall-of-flags" component={WallOfFlags} />
       <Route path="/404" component={NotFound} />
       <Route component={NotFound} />
     </Switch>

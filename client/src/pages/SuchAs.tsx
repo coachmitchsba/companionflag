@@ -6,19 +6,19 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
-const HERO_BG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663344373217/Gt9L2E9sF7QsUjdxWiBePy/cf-hero-v2-cVgkMLJTXteqZtNer2dfLS.webp";
+const HERO_BG = "/manus-storage/cf-hero-v2_cdce503b.jpg";
 
 const slides = [
-  { src: "/manus-storage/processes-of-birth_770cd134.jpg", alt: "The processes of birth, aging, and death", title: "The Processes of Birth, Aging, and Death" },
-  { src: "/manus-storage/love-of-children_8a8ca5a8.jpg", alt: "The love of children", title: "The Love of Children" },
-  { src: "/manus-storage/love-of-music_9fae1457.jpg", alt: "The love of music, stories, and dance", title: "The Love of Music, Stories, and Dance" },
-  { src: "/manus-storage/need-for-food_923c3764.jpg", alt: "The need for food, water, and air", title: "The Need for Food, Water, and Air" },
-  { src: "/manus-storage/concern-for-friends_4d0b6595.jpg", alt: "Concern for the safety and happiness of loved ones", title: "Concern for the Safety of Loved Ones" },
-  { src: "/manus-storage/susceptibility-to-pain_00359040.jpg", alt: "Susceptibility to pain and pleasure", title: "Susceptibility to Pain and Pleasure" },
-  { src: "/manus-storage/survive-flourish_dc2c3a29.jpg", alt: "The desire to survive and flourish", title: "The Desire to Survive and Flourish" },
-  { src: "/manus-storage/desire-to-feel-safe_74c57464.jpg", alt: "The desire to feel safe and at home in the world", title: "The Desire to Feel Safe and at Home in the World" },
-  { src: "/manus-storage/setbacks-uncertainties_e825ce39.jpg", alt: "Setbacks and uncertainties", title: "Setbacks and Uncertainties" },
-  { src: "/manus-storage/desiretofitinv1_8d466ea4.jpg", alt: "The desire to fit in. To matter to oneself and others.", title: "The Desire to Fit In. To Matter to Oneself and Others." },
+  { src: "/images/processes-of-birth.jpg", alt: "The processes of birth, aging, and death", title: "The Processes of Birth, Aging, and Death" },
+  { src: "/images/love-of-children.jpg", alt: "The love of children", title: "The Love of Children" },
+  { src: "/images/love-of-music.jpg", alt: "The love of music, stories, and dance", title: "The Love of Music, Stories, and Dance" },
+  { src: "/images/need-for-food.jpg", alt: "The need for food, water, and air", title: "The Need for Food, Water, and Air" },
+  { src: "/images/concern-for-friends.jpg", alt: "Concern for the safety and happiness of loved ones", title: "Concern for the Safety of Loved Ones" },
+  { src: "/images/susceptibility-to-pain.jpg", alt: "Susceptibility to pain and pleasure", title: "Susceptibility to Pain and Pleasure" },
+  { src: "/images/survive-flourish.jpg", alt: "The desire to survive and flourish", title: "The Desire to Survive and Flourish" },
+  { src: "/images/desire-to-feel-safe.jpg", alt: "The desire to feel safe and at home in the world", title: "The Desire to Feel Safe and at Home in the World" },
+  { src: "/images/setbacks-uncertainties.jpg", alt: "Setbacks and uncertainties", title: "Setbacks and Uncertainties" },
+  { src: "/images/desiretofitinv1.jpg", alt: "The desire to fit in. To matter to oneself and others.", title: "The Desire to Fit In. To Matter to Oneself and Others." },
 ];
 
 export default function SuchAs() {

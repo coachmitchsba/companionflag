@@ -1,6 +1,7 @@
 /* Home Page — Companion Flag "Warm Globe" Design
-   Sections: Hero → What is CF → Such as? Preview → Philosophy → Is this for you? → CTA
-   Parchment backgrounds, Cormorant Garamond display, Lora body */
+   Sections: Hero → What is CF → Placeholder → Precision is Key → Such as? → Slideshow Modal → Physical Flag → Philosophy → Gallery → Is this for you? → History
+   Parchment backgrounds, Cormorant Garamond display, Lora body
+   Sky blue accent: #3CCDFC (true sky blue, matching "Reflect & Explore" button tone) */
 
 import { useState, useEffect, useRef } from "react";
 import { Link } from "wouter";
@@ -8,21 +9,38 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
-const HERO_BG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663344373217/Gt9L2E9sF7QsUjdxWiBePy/cf-hero-v2-cVgkMLJTXteqZtNer2dfLS.webp";
-const TEXTURE_BG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663344373217/Gt9L2E9sF7QsUjdxWiBePy/cf-section-bg-v2-brtoNWaApaBXVtDqw3p2Hu.webp";
-const MONTAGE = "/manus-storage/montage_5ae5ebef.jpg";
+const HERO_BG = "/manus-storage/cf-hero-v2_cdce503b.jpg";
+const TEXTURE_BG = "/manus-storage/cf-section-bg-v2_5818c4e7.jpg";
+const MONTAGE = "/images/kidsonstage.jpg";
+const SKY = "#3CCDFC";
+const SKY_DARK = "#1AAAD4";
 
+// Slides with matching index for anchor linking
 const suchAsSlides = [
-  { src: "/manus-storage/processes-of-birth_770cd134.jpg", alt: "The processes of birth, aging, and death" },
-  { src: "/manus-storage/love-of-children_8a8ca5a8.jpg", alt: "The love of children" },
-  { src: "/manus-storage/love-of-music_9fae1457.jpg", alt: "The love of music, stories, and dance" },
-  { src: "/manus-storage/need-for-food_923c3764.jpg", alt: "The need for food, water, and air" },
-  { src: "/manus-storage/concern-for-friends_4d0b6595.jpg", alt: "Concern for the safety of loved ones" },
-  { src: "/manus-storage/susceptibility-to-pain_00359040.jpg", alt: "Susceptibility to pain and pleasure" },
-  { src: "/manus-storage/survive-flourish_dc2c3a29.jpg", alt: "The desire to survive and flourish" },
-  { src: "/manus-storage/desire-to-feel-safe_74c57464.jpg", alt: "The desire to feel safe and at home in the world" },
-  { src: "/manus-storage/setbacks-uncertainties_e825ce39.jpg", alt: "Setbacks and uncertainties" },
-  { src: "/manus-storage/desiretofitinv1_8d466ea4.jpg", alt: "The desire to fit in. To matter to oneself and others." },
+  { src: "/images/processes-of-birth.jpg", alt: "The processes of birth, aging, and death", label: "The processes of birth, aging, and death" },
+  { src: "/images/love-of-children.jpg", alt: "The love of children", label: "The love of children" },
+  { src: "/images/love-of-music.jpg", alt: "The love of music, stories, and dance", label: "The love of stories, music, and dance" },
+  { src: "/images/need-for-food.jpg", alt: "The need for food, water, and air", label: "The need for food, water, and air" },
+  { src: "/images/concern-for-friends.jpg", alt: "Concern for the safety of loved ones", label: "Concern for the safety and happiness of loved ones" },
+  { src: "/images/susceptibility-to-pain.jpg", alt: "Susceptibility to pain and pleasure", label: "Susceptibility to pain and pleasure, illness and injury" },
+  { src: "/images/survive-flourish.jpg", alt: "The desire to survive and flourish", label: "The desire to survive and flourish" },
+  { src: "/images/desire-to-feel-safe.jpg", alt: "The desire to feel safe and at home in the world", label: "The desire to feel safe and at home in the world" },
+  { src: "/images/setbacks-uncertainties.jpg", alt: "Setbacks and uncertainties", label: "Setbacks and uncertainties" },
+  { src: "/images/desiretofitinv1.jpg", alt: "The desire to fit in. To matter to oneself and others.", label: "The desire to be accepted and seen as a complete and worthwhile human being" },
+];
+
+// Map example text to slide index
+const examplesWithSlides: { text: string; slideIndex: number }[] = [
+  { text: "The love of children", slideIndex: 1 },
+  { text: "The desire for health and knowledge", slideIndex: 7 },
+  { text: "Concern for the safety and happiness of loved ones", slideIndex: 4 },
+  { text: "Susceptibility to pain and pleasure, illness and injury", slideIndex: 5 },
+  { text: "The need for food, water, and air", slideIndex: 3 },
+  { text: "The processes of birth, aging, and death", slideIndex: 0 },
+  { text: "The love of stories, music, and dance", slideIndex: 2 },
+  { text: "Our reliance on rational thinking and symbolic communication", slideIndex: 8 },
+  { text: "The desire to be accepted and seen as a complete and worthwhile human being", slideIndex: 9 },
+  { text: "The desire to feel safe and at home in the world", slideIndex: 7 },
 ];
 
 function FadeInSection({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
@@ -48,6 +66,7 @@ export default function Home() {
   const [slideOpen, setSlideOpen] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
+  const suchAsRef = useRef<HTMLElement>(null);
 
   const goToSlide = (index: number) => {
     if (isTransitioning) return;
@@ -56,6 +75,17 @@ export default function Home() {
   };
   const prevSlide = () => goToSlide((currentSlide - 1 + suchAsSlides.length) % suchAsSlides.length);
   const nextSlide = () => goToSlide((currentSlide + 1) % suchAsSlides.length);
+
+  const openSlideAt = (index: number) => {
+    setCurrentSlide(index);
+    setSlideOpen(true);
+    // Scroll to such-as section
+    suchAsRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+  };
+
+  const scrollToSuchAs = () => {
+    suchAsRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
 
   useEffect(() => {
     if (!slideOpen) return;
@@ -68,7 +98,6 @@ export default function Home() {
     return () => window.removeEventListener("keydown", handler);
   }, [slideOpen, currentSlide, isTransitioning]);
 
-  // Lock body scroll when modal is open
   useEffect(() => {
     document.body.style.overflow = slideOpen ? "hidden" : "";
     return () => { document.body.style.overflow = ""; };
@@ -86,12 +115,13 @@ export default function Home() {
         <div className="absolute inset-0 bg-[#F5EDD6]/35" />
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-28">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            {/* Left: text */}
             <div>
               <p className="text-sm tracking-[0.25em] uppercase mb-4 text-[#8B6E4E]" style={{ fontFamily: "'Raleway', sans-serif", fontWeight: 500 }}>
                 A Non-Profit Initiative
               </p>
               <h1 className="text-5xl sm:text-6xl lg:text-7xl text-[#3D2B1F] leading-tight mb-6" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontWeight: 500 }}>
-                Imagine it<br /><em className="text-[#5BA3C9]">everywhere…</em>
+                Imagine it<br /><em style={{ color: SKY }}>everywhere…</em>
               </h1>
               <div className="h-0.5 w-24 bg-[#C9A84C] mb-6" />
               <p className="text-xl text-[#5C4033] leading-relaxed mb-8 max-w-lg" style={{ fontFamily: "'Lora', Georgia, serif" }}>
@@ -100,7 +130,7 @@ export default function Home() {
               <div className="flex flex-wrap gap-4">
                 <Link href="/about">
                   <button className="px-7 py-3 text-sm tracking-wide text-white rounded-sm shadow-md hover:shadow-lg transition-all hover:-translate-y-0.5"
-                    style={{ fontFamily: "'Raleway', sans-serif", fontWeight: 600, backgroundColor: "#5BA3C9", letterSpacing: "0.08em" }}>
+                    style={{ fontFamily: "'Raleway', sans-serif", fontWeight: 600, backgroundColor: SKY, letterSpacing: "0.08em" }}>
                     Learn More
                   </button>
                 </Link>
@@ -112,12 +142,17 @@ export default function Home() {
                 </Link>
               </div>
             </div>
+
+            {/* Right: hero image */}
             <div className="flex justify-center lg:justify-end">
-              <div className="relative">
+              <div className="relative w-full max-w-lg">
                 <div className="absolute -inset-3 bg-[#C9A84C]/20 rounded-sm -rotate-1" />
-                <img src={MONTAGE} alt="Companion Flag adoption ceremonies around the world"
-                  className="relative rounded-sm shadow-2xl max-w-full w-full lg:max-w-lg"
-                  style={{ border: "6px solid white" }} />
+                <img
+                  src="/images/hero-flags.jpg"
+                  alt="Flags of the world flying together"
+                  className="relative rounded-sm shadow-2xl w-full object-cover"
+                  style={{ border: "6px solid white", maxHeight: "380px" }}
+                />
               </div>
             </div>
           </div>
@@ -129,78 +164,132 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ═══════════════════════════════════════════ WHAT IS CF ═══ */}
+      {/* ═══════════════════════════════════════════ WHAT IS CF — single column ═══ */}
       <section className="py-20 lg:py-28" style={{ backgroundColor: "#F5EDD6" }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <FadeInSection>
-            <div className="max-w-3xl mx-auto text-center mb-16">
+            <div className="text-center mb-12">
               <p className="text-sm tracking-[0.25em] uppercase text-[#8B6E4E] mb-3" style={{ fontFamily: "'Raleway', sans-serif", fontWeight: 500 }}>The Companion Flag</p>
               <h2 className="text-4xl sm:text-5xl text-[#3D2B1F] mb-6 leading-tight" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontWeight: 500 }}>
-                The World's First Symbol of All Human Samenesses
+                The World's First Symbol of Our Shared Humanity
+              </h2>
+              <div className="h-0.5 w-16 bg-[#C9A84C] mx-auto" />
+            </div>
+          </FadeInSection>
+
+          <FadeInSection delay={100}>
+            <div className="space-y-5 mb-14">
+              <p className="text-lg text-[#3D2B1F] leading-relaxed" style={{ fontFamily: "'Lora', Georgia, serif" }}>
+                The idea? To foreground and make salient to children everywhere the fact that we humans, throughout our lives, are not only different from other people across town or across the globe, but also the same in important ways. It is always both. It is not (nor has it ever been) just one or the other.
+              </p>
+              <p className="text-lg text-[#3D2B1F] leading-relaxed" style={{ fontFamily: "'Lora', Georgia, serif" }}>
+                Adding the Companion Flag below the world's existing flags makes this point. It is not a panacea. However, the Companion Flag, with its host flag above, is a vehicle of truth-telling and connection. A song of the heart. Over time, the two flags' explicit and implicit messaging will:
+              </p>
+              <ul className="space-y-3 pl-2" style={{ fontFamily: "'Lora', Georgia, serif" }}>
+                <li className="flex items-start gap-3 text-lg text-[#3D2B1F] leading-relaxed">
+                  <span className="mt-2 w-2 h-2 rounded-full flex-shrink-0" style={{ backgroundColor: SKY }} />
+                  <span>Usher in, for our children and future generations, a new way of seeing 'self' and 'other';</span>
+                </li>
+                <li className="flex items-start gap-3 text-lg text-[#3D2B1F] leading-relaxed">
+                  <span className="mt-2 w-2 h-2 rounded-full flex-shrink-0" style={{ backgroundColor: SKY }} />
+                  <span>Promote patience and understanding, care, concern, and fellow feeling across all of our borders and differences; and</span>
+                </li>
+                <li className="flex items-start gap-3 text-lg text-[#3D2B1F] leading-relaxed">
+                  <span className="mt-2 w-2 h-2 rounded-full flex-shrink-0" style={{ backgroundColor: SKY }} />
+                  <span>Clear a new, historic space for increased levels of cooperation, connection, and non-violent conflict resolution.</span>
+                </li>
+              </ul>
+            </div>
+          </FadeInSection>
+
+          {/* Montage photo */}
+          <FadeInSection delay={200}>
+            <div className="relative flex justify-center">
+              <div className="absolute -inset-2 bg-[#C9A84C]/15 rounded-sm -rotate-1" />
+              <img
+                src={MONTAGE}
+                alt="Companion Flag adoption ceremonies around the world"
+                className="relative rounded-sm shadow-xl w-full max-w-2xl"
+                style={{ border: "5px solid white" }}
+              />
+            </div>
+          </FadeInSection>
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════════════════ PRECISION IS KEY ═══ */}
+      <section className="py-20 lg:py-28 relative" style={{ backgroundColor: "#EDE3CC" }}>
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <FadeInSection>
+            <div className="text-center mb-12">
+              <p className="text-sm tracking-[0.25em] uppercase text-[#8B6E4E] mb-3" style={{ fontFamily: "'Raleway', sans-serif", fontWeight: 500 }}>A Crucial Distinction</p>
+              <h2 className="text-4xl sm:text-5xl text-[#3D2B1F] mb-4 leading-tight" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontWeight: 500 }}>
+                Precision is Key: Distinguishing 'Shared Differences'<br className="hidden sm:block" /> from 'Human Samenesses'
               </h2>
               <div className="h-0.5 w-16 bg-[#C9A84C] mx-auto mb-8" />
             </div>
           </FadeInSection>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
-            <FadeInSection delay={100}>
-              <div className="space-y-5">
-                <p className="text-lg text-[#3D2B1F] leading-relaxed" style={{ fontFamily: "'Lora', Georgia, serif" }}>
-                  The idea? To model and proclaim publicly — for ourselves, but mainly for our children and all future generations — that while we are proud of our differences, diversity, and special affiliations, we are also mindful of our essential humanity and all that we share in common with people everywhere.
-                </p>
-                <p className="text-lg text-[#3D2B1F] leading-relaxed" style={{ fontFamily: "'Lora', Georgia, serif" }}>
-                  To see ourselves and others this way is to clear a space in our daily lives for increased compassionate regard for the other, and deeper self-understanding and self-compassion.
-                </p>
-                <blockquote className="border-l-4 border-[#87CEEB] pl-5 py-2 my-6">
-                  <p className="text-xl italic text-[#5C4033] leading-relaxed" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontWeight: 400 }}>
-                    "Human samenesses" refers to <em>any and all human characteristics, experiences, concerns, desires, beliefs, or susceptibilities that are shared by all people everywhere, their human differences notwithstanding.</em>
+
+          <FadeInSection delay={100}>
+            <div className="mb-10">
+              {/* Definition blockquote */}
+              <div className="flex gap-5 mb-10">
+                <div className="flex-shrink-0 w-1 rounded-full" style={{ backgroundColor: SKY }} />
+                <div>
+                  <p className="text-base text-[#5C4033] mb-2" style={{ fontFamily: "'Lora', Georgia, serif", lineHeight: "1.85" }}>
+                    <span className="text-2xl sm:text-3xl font-semibold" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", color: SKY_DARK }}>
+                      "Human Samenesses"
+                    </span>{" "}
+                    refers to any and all human characteristics, experiences, concerns, desires, beliefs, or susceptibilities that are shared by all people everywhere, their human differences notwithstanding.
                   </p>
-                </blockquote>
-                <div className="pt-2">
-                  <Link href="/about">
-                    <button className="text-sm font-semibold text-[#5BA3C9] hover:text-[#3D8AB0] transition-colors" style={{ fontFamily: "'Raleway', sans-serif" }}>
-                      Read the full story →
+                </div>
+              </div>
+
+              {/* Examples heading */}
+              <h3 className="text-2xl text-[#3D2B1F] mb-5" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontWeight: 600 }}>
+                Examples of Human Samenesses:
+              </h3>
+
+              {/* Examples list — each links to matching slide */}
+              <ul className="space-y-2 mb-8">
+                {examplesWithSlides.map((item, i) => (
+                  <li key={i} className="flex items-start gap-3">
+                    <span className="mt-1.5 flex-shrink-0 w-1.5 h-1.5 rounded-full" style={{ backgroundColor: SKY }} />
+                    <button
+                      onClick={() => openSlideAt(item.slideIndex)}
+                      className="text-left text-base leading-relaxed transition-colors hover:underline"
+                      style={{ fontFamily: "'Lora', Georgia, serif", color: "#3D2B1F" }}
+                      onMouseEnter={e => (e.currentTarget.style.color = SKY_DARK)}
+                      onMouseLeave={e => (e.currentTarget.style.color = "#3D2B1F")}
+                    >
+                      {item.text}
                     </button>
-                  </Link>
-                </div>
-              </div>
-            </FadeInSection>
-            <FadeInSection delay={200}>
-              <div className="rounded-sm p-8 shadow-md" style={{ backgroundColor: "#EDE3CC", border: "1px solid #D4C4A0" }}>
-                <h3 className="text-2xl text-[#3D2B1F] mb-5" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontWeight: 600 }}>Examples of Human Samenesses:</h3>
-                <ul className="space-y-2">
-                  {[
-                    "The love of children",
-                    "The desire for health and knowledge",
-                    "Concern for the safety and happiness of loved ones",
-                    "Susceptibility to pain and pleasure, illness and injury",
-                    "The need for food, water, and air",
-                    "The processes of birth, aging, and death",
-                    "The love of stories, music, and dance",
-                    "Our reliance on rational thinking and symbolic communication",
-                    "The desire to be accepted and seen as a complete and worthwhile human being",
-                    "The desire to feel safe and at home in the world",
-                  ].map((item, i) => (
-                    <li key={i} className="flex items-start gap-3">
-                      <span className="text-[#87CEEB] mt-1 flex-shrink-0">•</span>
-                      <span className="text-[#5C4033] text-sm leading-relaxed" style={{ fontFamily: "'Lora', Georgia, serif" }}>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-                <div className="mt-6 pt-4 border-t border-[#D4C4A0]">
-                  <button onClick={() => { setSlideOpen(true); setCurrentSlide(0); }}
-                    className="inline-flex items-center gap-2 text-sm font-semibold text-[#5BA3C9] hover:text-[#3D8AB0] transition-colors"
-                    style={{ fontFamily: "'Raleway', sans-serif" }}>
-                    See all human samenesses illustrated →
-                  </button>
-                </div>
-              </div>
-            </FadeInSection>
-          </div>
+                  </li>
+                ))}
+              </ul>
+
+              {/* Anchor link to Such as? slideshow */}
+              <button
+                onClick={scrollToSuchAs}
+                className="inline-flex items-center gap-2 text-sm font-semibold transition-colors"
+                style={{ fontFamily: "'Raleway', sans-serif", color: SKY }}
+                onMouseEnter={e => (e.currentTarget.style.color = SKY_DARK)}
+                onMouseLeave={e => (e.currentTarget.style.color = SKY)}
+              >
+                See all human samenesses illustrated ↓
+              </button>
+            </div>
+          </FadeInSection>
         </div>
       </section>
 
       {/* ═══════════════════════════════════════════ SUCH AS? ═══ */}
-      <section className="py-20 lg:py-28 relative" style={{ backgroundImage: `url(${TEXTURE_BG})`, backgroundSize: "cover" }}>
+      <section
+        id="such-as"
+        ref={suchAsRef}
+        className="py-20 lg:py-28 relative"
+        style={{ backgroundImage: `url(${TEXTURE_BG})`, backgroundSize: "cover" }}
+      >
         <div className="absolute inset-0 bg-[#F0E6D0]/82" />
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <FadeInSection>
@@ -220,7 +309,7 @@ export default function Home() {
               </p>
               <button onClick={() => { setSlideOpen(true); setCurrentSlide(0); }}
                 className="inline-flex items-center gap-3 px-8 py-4 text-white rounded-sm shadow-lg hover:shadow-xl transition-all hover:-translate-y-0.5 text-base"
-                style={{ fontFamily: "'Raleway', sans-serif", fontWeight: 600, backgroundColor: "#5BA3C9", letterSpacing: "0.06em" }}>
+                style={{ fontFamily: "'Raleway', sans-serif", fontWeight: 600, backgroundColor: SKY, letterSpacing: "0.06em" }}>
                 <span className="text-xl">✦</span> Such as?
               </button>
             </div>
@@ -263,7 +352,8 @@ export default function Home() {
             <div className="flex justify-center gap-2 mt-4">
               {suchAsSlides.map((_, i) => (
                 <button key={i} onClick={() => goToSlide(i)}
-                  className={`w-2.5 h-2.5 rounded-full transition-all ${i === currentSlide ? "bg-[#87CEEB] scale-125" : "bg-white/50 hover:bg-white/80"}`} />
+                  className={`w-2.5 h-2.5 rounded-full transition-all ${i === currentSlide ? "scale-125" : "bg-white/50 hover:bg-white/80"}`}
+                  style={{ backgroundColor: i === currentSlide ? SKY : undefined }} />
               ))}
             </div>
             <p className="text-center text-white/80 text-sm mt-3" style={{ fontFamily: "'Lora', Georgia, serif", fontStyle: "italic" }}>
@@ -273,6 +363,32 @@ export default function Home() {
         </div>
       )}
 
+      {/* ═══════════════════════════════════════════ PHYSICAL FLAG PHOTO ═══ */}
+      <section className="py-16 lg:py-20" style={{ backgroundColor: "#F5EDD6" }}>
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <FadeInSection>
+            <div className="flex flex-col lg:flex-row items-center gap-10 lg:gap-16">
+              <div className="flex-shrink-0 w-full lg:w-80">
+                <div className="rounded-sm overflow-hidden shadow-xl" style={{ border: "1px solid #D4C4A0" }}>
+                  <img
+                    src="/images/cf-physical-flag.jpg"
+                    alt="A physical Companion Flag — white field with a warm stripe across the top"
+                    className="w-full h-auto object-cover"
+                  />
+                </div>
+              </div>
+              <div className="flex-1">
+                <p className="text-sm tracking-[0.25em] uppercase text-[#8B6E4E] mb-3" style={{ fontFamily: "'Raleway', sans-serif", fontWeight: 500 }}>Simple. Elegant. Universal.</p>
+                <h2 className="text-3xl sm:text-4xl text-[#3D2B1F] mb-5 leading-tight" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontWeight: 500 }}>A flag that belongs beside every flag</h2>
+                <p className="text-lg text-[#5C4033] leading-relaxed" style={{ fontFamily: "'Lora', Georgia, serif" }}>
+                  The Companion Flag is a physical object — a real flag, sewn from the same materials as the flag it accompanies. Its design is intentionally simple: a bright white field with a single stripe whose color is drawn from the host flag above. That simplicity is the point. It says: <em>we are proud of what makes us different, and we are mindful of what makes us the same.</em>
+                </p>
+              </div>
+            </div>
+          </FadeInSection>
+        </div>
+      </section>
+
       {/* ═══════════════════════════════════════════ PHILOSOPHY ═══ */}
       <section className="py-20 lg:py-28" style={{ backgroundColor: "#F5EDD6" }}>
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -280,7 +396,7 @@ export default function Home() {
             <div className="text-center mb-12">
               <div className="inline-flex items-center gap-3 mb-6">
                 <div className="h-px w-12 bg-[#C9A84C]" />
-                <div className="w-8 h-8 rounded-full bg-[#87CEEB] border-2 border-[#5BA3C9] flex items-center justify-center">
+                <div className="w-8 h-8 rounded-full border-2 flex items-center justify-center" style={{ backgroundColor: SKY, borderColor: SKY_DARK }}>
                   <div className="flex flex-col items-center gap-0.5">
                     <div className="w-4 h-1.5 bg-white rounded-sm" />
                     <div className="w-4 h-1 bg-[#C9A84C] rounded-sm" />
@@ -298,9 +414,39 @@ export default function Home() {
               <p className="text-xl sm:text-2xl text-[#3D2B1F] leading-relaxed" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontWeight: 400 }}>
                 We humans are not just different, as the world's symbolic landscape has suggested to impressionable children across the globe for centuries. We are different in valid and important ways, and the same in valid and important ways. Both parts together, not one or the other, make up the whole of our identity.
               </p>
-              <p className="text-2xl sm:text-3xl text-[#5BA3C9] leading-relaxed font-medium" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontStyle: "italic" }}>
+              <p className="text-2xl sm:text-3xl leading-relaxed font-medium" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontStyle: "italic", color: SKY }}>
                 "The Companion Flag, like — and with! — each host flag flying above it, is a vehicle of connection. A song of the heart."
               </p>
+            </div>
+          </FadeInSection>
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════════════════ GALLERY ═══ */}
+      <section className="py-16 lg:py-20" style={{ backgroundColor: "#EDE3CC" }}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <FadeInSection>
+            <div className="flex flex-wrap justify-center gap-4">
+              {[
+                { src: "/images/peru-ollantaytambo.jpg", locale: "Ollantaytambo, Peru" },
+                { src: "/images/seattle-ingraham.jpg", locale: "Seattle, USA" },
+                { src: "/images/andijan-uzbekistan.jpg", locale: "Andijan, Uzbekistan" },
+              ].map((photo, i) => (
+                <div key={i} className="relative overflow-hidden rounded-sm shadow-md group" style={{ aspectRatio: "3/2", width: "clamp(260px, 30%, 420px)" }}>
+                  <img
+                    src={photo.src}
+                    alt={photo.locale}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#1A0E06]/70 via-transparent to-transparent" />
+                  <p
+                    className="absolute bottom-3 left-3 right-3 text-xs text-[#F5EDD6] leading-snug"
+                    style={{ fontFamily: "'Raleway', sans-serif", fontWeight: 500, letterSpacing: "0.04em" }}
+                  >
+                    {photo.locale}
+                  </p>
+                </div>
+              ))}
             </div>
           </FadeInSection>
         </div>
@@ -319,7 +465,7 @@ export default function Home() {
             <div className="flex flex-wrap justify-center gap-4">
               <Link href="/self-test">
                 <button className="px-8 py-4 rounded-sm shadow-lg hover:shadow-xl transition-all hover:-translate-y-0.5 text-base font-semibold"
-                  style={{ fontFamily: "'Raleway', sans-serif", backgroundColor: "#87CEEB", color: "#1A1008", letterSpacing: "0.06em" }}>
+                  style={{ fontFamily: "'Raleway', sans-serif", backgroundColor: SKY, color: "#fff", letterSpacing: "0.06em" }}>
                   Reflect &amp; Explore
                 </button>
               </Link>
@@ -344,7 +490,9 @@ export default function Home() {
             </p>
             <div className="mt-8">
               <Link href="/about">
-                <button className="text-sm font-semibold text-[#5BA3C9] hover:text-[#3D8AB0] transition-colors" style={{ fontFamily: "'Raleway', sans-serif" }}>
+                <button className="text-sm font-semibold transition-colors" style={{ fontFamily: "'Raleway', sans-serif", color: SKY }}
+                  onMouseEnter={e => (e.currentTarget.style.color = SKY_DARK)}
+                  onMouseLeave={e => (e.currentTarget.style.color = SKY)}>
                   Read the full story →
                 </button>
               </Link>

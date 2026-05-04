@@ -6,8 +6,6 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Link } from "wouter";
 
-const HERO_BG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663344373217/Gt9L2E9sF7QsUjdxWiBePy/cf-hero-v2-cVgkMLJTXteqZtNer2dfLS.webp";
-
 function FadeInSection({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
   const ref = useRef<HTMLDivElement>(null);
   useEffect(() => {
@@ -75,9 +73,8 @@ export default function About() {
   return (
     <div className="min-h-screen" style={{ backgroundColor: "#F5EDD6" }}>
       <Navigation />
-      <div className="pt-32 pb-16 relative" style={{ backgroundImage: `url(${HERO_BG})`, backgroundSize: "cover", backgroundPosition: "center top" }}>
-        <div className="absolute inset-0 bg-[#F5EDD6]/60" />
-        <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <div className="pt-32 pb-16" style={{ backgroundColor: "#F5EDD6" }}>
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <p className="text-sm tracking-[0.25em] uppercase text-[#8B6E4E] mb-3" style={{ fontFamily: "'Raleway', sans-serif", fontWeight: 500 }}>About the Project</p>
           <h1 className="text-5xl sm:text-6xl text-[#3D2B1F] leading-tight mb-4" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontWeight: 500 }}>The Companion Flag</h1>
           <div className="h-0.5 w-16 bg-[#C9A84C] mx-auto" />
@@ -189,7 +186,7 @@ export default function About() {
                 <p className="text-lg italic text-[#E8D8B8] mb-3" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}>
                   "A vehicle of connection. A song of the heart."
                 </p>
-                <a href="/manus-storage/cf-spec-sheet_18841a65.pdf" target="_blank" rel="noopener noreferrer" className="text-xs text-[#87CEEB] hover:underline" style={{ fontFamily: "'Raleway', sans-serif" }}>
+                <a href="/images/cf-spec-sheet.pdf" target="_blank" rel="noopener noreferrer" className="text-xs text-[#87CEEB] hover:underline" style={{ fontFamily: "'Raleway', sans-serif" }}>
                   Download the CF Spec Sheet →
                 </a>
               </div>
