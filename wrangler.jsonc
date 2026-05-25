@@ -1,7 +1,10 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "companionflag-website",
-  "pages_build_output_dir": "dist/public",
+  "name": "companionflag",
   "compatibility_date": "2026-05-25",
-  "compatibility_flags": ["nodejs_compat"]
+  "compatibility_flags": ["nodejs_compat"],
+  "assets": {
+    "directory": "./dist/public",
+    "not_found_handling": "single-page-application"
+  }
 }
