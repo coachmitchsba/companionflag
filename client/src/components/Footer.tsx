@@ -1,11 +1,25 @@
 /* Footer — Companion Flag "Warm Globe" Design
-   Deep brown background, warm gold accents, Raleway nav */
+   Deep brown background, warm gold accents, Raleway nav
+   Three columns: Brand | Navigation | Contact Us (with email form) */
 
+import { useState } from "react";
 import { Link } from "wouter";
-import { Mail, ExternalLink } from "lucide-react";
-
 
 export default function Footer() {
+  const [form, setForm] = useState({ name: "", email: "", country: "", message: "", permission: "" });
+  const [submitted, setSubmitted] = useState(false);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    // Build mailto link as a simple fallback for static site
+    const subject = encodeURIComponent("Message from Companion Flag Website");
+    const body = encodeURIComponent(
+      `Name: ${form.name}\nEmail: ${form.email}\nCountry: ${form.country}\nPermission to share: ${form.permission}\n\nMessage:\n${form.message}`
+    );
+    window.location.href = `mailto:info@companionflag.org?subject=${subject}&body=${body}`;
+    setSubmitted(true);
+  };
+
   return (
     <footer className="bg-[#2A1F15] text-[#E8D8B8]">
       {/* CF stripe at top */}
@@ -13,7 +27,8 @@ export default function Footer() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-          {/* Brand */}
+
+          {/* ── Column 1: Brand ── */}
           <div>
             <div className="flex items-center gap-3 mb-4">
               <div className="w-10 h-10 rounded-full flex-shrink-0 overflow-hidden" style={{ border: "2px solid #1AAAD4" }}>
@@ -40,7 +55,7 @@ export default function Footer() {
             </p>
           </div>
 
-          {/* Navigation */}
+          {/* ── Column 2: Navigation ── */}
           <div>
             <h3
               className="text-xs tracking-widest uppercase text-[#C9A84C] mb-4"
@@ -51,18 +66,19 @@ export default function Footer() {
             <nav className="flex flex-col gap-2">
               {[
                 { href: "/", label: "Home" },
-                { href: "/about", label: "About the Companion Flag" },
-                { href: "/such-as", label: "Human Samenesses" },
-                { href: "/wall-of-flags", label: "A Flag for Every Flag" },
+                { href: "/news", label: "News & Updates" },
                 { href: "/self-test", label: "Is this idea for you?" },
-                { href: "/how-to-acquire", label: "How to Acquire a CF" },
+                { href: "/share", label: "Share the Idea!" },
+                { href: "/how-to-acquire", label: "Acquire a CF" },
+                { href: "/ambassadors", label: "CF Ambassadors" },
+                { href: "/origination", label: "Points of Origination" },
                 { href: "/resources", label: "Resources & Links" },
+                { href: "/history", label: "History" },
                 { href: "/faq", label: "Frequently Asked Questions" },
-                { href: "/contact", label: "Contact Us" },
               ].map((link) => (
                 <Link key={link.href} href={link.href}>
                   <span
-                    className="text-sm text-[#B8A890] transition-colors"
+                    className="text-sm text-[#B8A890] transition-colors cursor-pointer"
                     onMouseEnter={e => (e.currentTarget.style.color = '#3CCDFC')}
                     onMouseLeave={e => (e.currentTarget.style.color = '')}
                     style={{ fontFamily: "'Raleway', sans-serif" }}
@@ -74,38 +90,88 @@ export default function Footer() {
             </nav>
           </div>
 
-          {/* Contact & Resources */}
+          {/* ── Column 3: Contact Us ── */}
           <div>
             <h3
               className="text-xs tracking-widest uppercase text-[#C9A84C] mb-4"
               style={{ fontFamily: "'Raleway', sans-serif", fontWeight: 600 }}
             >
-              Resources
+              Contact Us
             </h3>
-            <div className="flex flex-col gap-3">
-              <a
-                href="/images/cf-spec-sheet.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 text-sm text-[#B8A890] transition-colors"
-                onMouseEnter={e => (e.currentTarget.style.color = '#3CCDFC')}
-                onMouseLeave={e => (e.currentTarget.style.color = '')}
-                style={{ fontFamily: "'Raleway', sans-serif" }}
-              >
-                <ExternalLink size={14} />
-                Download CF Spec Sheet (PDF)
-              </a>
-              <a
-                href="mailto:info@companionflag.org"
-                className="flex items-center gap-2 text-sm text-[#B8A890] transition-colors"
-                onMouseEnter={e => (e.currentTarget.style.color = '#3CCDFC')}
-                onMouseLeave={e => (e.currentTarget.style.color = '')}
-                style={{ fontFamily: "'Raleway', sans-serif" }}
-              >
-                <Mail size={14} />
-                info@companionflag.org
-              </a>
-            </div>
+
+            {submitted ? (
+              <p className="text-sm text-[#B8A890]" style={{ fontFamily: "'Lora', Georgia, serif" }}>
+                Thank you for reaching out! We'll be in touch soon.
+              </p>
+            ) : (
+              <>
+                <p className="text-sm text-[#B8A890] mb-4 leading-relaxed" style={{ fontFamily: "'Lora', Georgia, serif" }}>
+                  We'd love to hear from you! Share your questions, impressions, or critiques of the CF idea!
+                </p>
+                <form onSubmit={handleSubmit} className="flex flex-col gap-3">
+                  <input
+                    type="text"
+                    placeholder="Your name"
+                    value={form.name}
+                    onChange={e => setForm(f => ({ ...f, name: e.target.value }))}
+                    className="w-full px-3 py-2 text-sm bg-[#3D2B1F] text-[#E8D8B8] placeholder-[#6B5A48] rounded-sm border border-[#4D3B2F] focus:outline-none focus:border-[#3CCDFC]"
+                    style={{ fontFamily: "'Raleway', sans-serif" }}
+                  />
+                  <input
+                    type="email"
+                    placeholder="Your email"
+                    value={form.email}
+                    onChange={e => setForm(f => ({ ...f, email: e.target.value }))}
+                    className="w-full px-3 py-2 text-sm bg-[#3D2B1F] text-[#E8D8B8] placeholder-[#6B5A48] rounded-sm border border-[#4D3B2F] focus:outline-none focus:border-[#3CCDFC]"
+                    style={{ fontFamily: "'Raleway', sans-serif" }}
+                  />
+                  <input
+                    type="text"
+                    placeholder="Your country"
+                    value={form.country}
+                    onChange={e => setForm(f => ({ ...f, country: e.target.value }))}
+                    className="w-full px-3 py-2 text-sm bg-[#3D2B1F] text-[#E8D8B8] placeholder-[#6B5A48] rounded-sm border border-[#4D3B2F] focus:outline-none focus:border-[#3CCDFC]"
+                    style={{ fontFamily: "'Raleway', sans-serif" }}
+                  />
+                  <textarea
+                    placeholder="Your message, question, or critique…"
+                    value={form.message}
+                    onChange={e => setForm(f => ({ ...f, message: e.target.value }))}
+                    rows={3}
+                    className="w-full px-3 py-2 text-sm bg-[#3D2B1F] text-[#E8D8B8] placeholder-[#6B5A48] rounded-sm border border-[#4D3B2F] focus:outline-none focus:border-[#3CCDFC] resize-none"
+                    style={{ fontFamily: "'Raleway', sans-serif" }}
+                  />
+                  {/* Permission Y/N */}
+                  <div>
+                    <p className="text-xs text-[#8B7A62] mb-2" style={{ fontFamily: "'Raleway', sans-serif" }}>
+                      Do you give us permission to share your message with others (at our discretion)?
+                    </p>
+                    <div className="flex gap-4">
+                      {["Yes", "No"].map(opt => (
+                        <label key={opt} className="flex items-center gap-2 cursor-pointer">
+                          <input
+                            type="radio"
+                            name="permission"
+                            value={opt}
+                            checked={form.permission === opt}
+                            onChange={e => setForm(f => ({ ...f, permission: e.target.value }))}
+                            className="accent-[#3CCDFC]"
+                          />
+                          <span className="text-sm text-[#B8A890]" style={{ fontFamily: "'Raleway', sans-serif" }}>{opt}</span>
+                        </label>
+                      ))}
+                    </div>
+                  </div>
+                  <button
+                    type="submit"
+                    className="px-5 py-2 text-sm text-white rounded-sm transition-all hover:-translate-y-0.5 hover:shadow-md"
+                    style={{ fontFamily: "'Raleway', sans-serif", fontWeight: 600, backgroundColor: "#1AAAD4", letterSpacing: "0.06em" }}
+                  >
+                    Send Message
+                  </button>
+                </form>
+              </>
+            )}
 
             <div className="mt-8 pt-6 border-t border-[#3D2B1F]">
               <p
@@ -122,6 +188,7 @@ export default function Footer() {
               </p>
             </div>
           </div>
+
         </div>
       </div>
     </footer>
