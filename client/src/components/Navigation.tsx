@@ -10,15 +10,19 @@ import { Menu, X, ChevronDown } from "lucide-react";
 const MOUNTAIN_BLUE = "#2C4A3E";
 const SKY = "#3CCDFC";
 
-// Full menu list per client spec
+// Full menu list — ordered sensibly, Spec Sheet second-to-last, News & Updates last
 const allLinks = [
   { href: "/", label: "Home" },
-  { href: "/news", label: "News & Updates" },
-  { href: "/how-to-acquire", label: "Acquire a CF" },
-  { href: "/images/cf-spec-sheet.pdf", label: "CF Spec Sheet", external: true },
+  { href: "/about", label: "About the CF" },
+  { href: "/such-as", label: "Such As?" },
   { href: "/wall-of-flags", label: "Host Flags" },
+  { href: "/how-to-acquire", label: "Acquire a CF" },
+  { href: "/self-test", label: "Self-Test" },
+  { href: "/resources", label: "Resources" },
   { href: "/faq", label: "FAQ" },
   { href: "/contact", label: "Contact" },
+  { href: "/images/cf-spec-sheet.pdf", label: "CF Spec Sheet", external: true },
+  { href: "/news", label: "News & Updates" },
 ];
 
 export default function Navigation() {
