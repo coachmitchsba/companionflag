@@ -5,6 +5,7 @@ import { useState, useEffect, useRef } from "react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Link } from "wouter";
+import DefinitionPopup from "@/components/DefinitionPopup";
 
 function FadeInSection({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -99,7 +100,28 @@ export default function About() {
             <FadeInSection delay={100}>
               <h2 className="text-3xl sm:text-4xl text-[#3D2B1F] mb-5" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontWeight: 500 }}>"Human Samenesses"</h2>
               <div className="space-y-4 text-[#3D2B1F]" style={{ fontFamily: "'Lora', Georgia, serif", fontSize: "1.05rem", lineHeight: "1.85" }}>
-                <p><em>"Human samenesses"</em> refers to any and all human characteristics, experiences, concerns, desires, beliefs, or susceptibilities that are shared by all people everywhere, their human differences notwithstanding.</p>
+                <p>
+                  <DefinitionPopup
+                    term='"Human samenesses"'
+                    underlineColor="#1AAAD4"
+                    definition={
+                      <>
+                        A &lsquo;human sameness,&rsquo; for our purposes, is: any characteristic, experience, concern, desire, belief, or susceptibility that is shared by all people everywhere, our human differences notwithstanding. Examples include the experiences of birth, aging, and death, concern for the safety and happiness of loved ones, and the desire to communicate effectively, and to understand others when they are trying to communicate with us. More examples in Glossary.
+                      </>
+                    }
+                  />{" "}
+                  refers to any and all human characteristics, experiences, concerns, desires, beliefs, or susceptibilities that are shared by all people everywhere, their{" "}
+                  <DefinitionPopup
+                    term="human differences"
+                    underlineColor="#1AAAD4"
+                    definition={
+                      <>
+                        A &lsquo;human difference&rsquo; is: any characteristic, experience, concern, desire, belief, or susceptibility that is not shared by all people everywhere. (NOTE: many human differences&mdash;e.g., owning a television set, or knowing how to ride a bicycle&mdash;are shared by millions, or even billions of people worldwide. Still, &lsquo;shared differences&rsquo; are, by definition, not human samenesses, a fact frequently (although not exclusively) lost on the very young). More examples in Glossary.
+                      </>
+                    }
+                  />{" "}
+                  notwithstanding.
+                </p>
               </div>
               <blockquote className="border-l-4 border-[#87CEEB] pl-5 py-2 my-6">
                 <p className="text-xl italic text-[#5C4033]" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}>

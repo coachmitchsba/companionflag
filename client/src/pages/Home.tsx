@@ -9,6 +9,8 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
+import DefinitionPopup from "@/components/DefinitionPopup";
+
 const HERO_BG = "/manus-storage/cf-hero-v2_cdce503b.jpg";
 const TEXTURE_BG = "/manus-storage/cf-section-bg-v2_5818c4e7.jpg";
 const MONTAGE = "/images/kidsonstage.jpg";
@@ -238,9 +240,27 @@ export default function Home() {
                 <div>
                   <p className="text-base text-[#5C4033] mb-2" style={{ fontFamily: "'Lora', Georgia, serif", lineHeight: "1.85" }}>
                     <span className="text-2xl sm:text-3xl font-semibold" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", color: SKY_DARK }}>
-                      "Human Samenesses"
+                      <DefinitionPopup
+                        term='"Human Samenesses"'
+                        underlineColor={SKY_DARK}
+                        definition={
+                          <>
+                            A &lsquo;human sameness,&rsquo; for our purposes, is: any characteristic, experience, concern, desire, belief, or susceptibility that is shared by all people everywhere, our human differences notwithstanding. Examples include the experiences of birth, aging, and death, concern for the safety and happiness of loved ones, and the desire to communicate effectively, and to understand others when they are trying to communicate with us. More examples in Glossary.
+                          </>
+                        }
+                      />
                     </span>{" "}
-                    refers to any and all human characteristics, experiences, concerns, desires, beliefs, or susceptibilities that are shared by all people everywhere, their human differences notwithstanding.
+                    refers to any and all human characteristics, experiences, concerns, desires, beliefs, or susceptibilities that are shared by all people everywhere, their{" "}
+                    <DefinitionPopup
+                      term="human differences"
+                      underlineColor={SKY_DARK}
+                      definition={
+                        <>
+                          A &lsquo;human difference&rsquo; is: any characteristic, experience, concern, desire, belief, or susceptibility that is not shared by all people everywhere. (NOTE: many human differences&mdash;e.g., owning a television set, or knowing how to ride a bicycle&mdash;are shared by millions, or even billions of people worldwide. Still, &lsquo;shared differences&rsquo; are, by definition, not human samenesses, a fact frequently (although not exclusively) lost on the very young). More examples in Glossary.
+                        </>
+                      }
+                    />{" "}
+                    notwithstanding.
                   </p>
                 </div>
               </div>
@@ -396,11 +416,8 @@ export default function Home() {
             <div className="text-center mb-12">
               <div className="inline-flex items-center gap-3 mb-6">
                 <div className="h-px w-12 bg-[#C9A84C]" />
-                <div className="w-8 h-8 rounded-full border-2 flex items-center justify-center" style={{ backgroundColor: SKY, borderColor: SKY_DARK }}>
-                  <div className="flex flex-col items-center gap-0.5">
-                    <div className="w-4 h-1.5 bg-white rounded-sm" />
-                    <div className="w-4 h-1 bg-[#C9A84C] rounded-sm" />
-                  </div>
+                <div className="w-8 h-8 rounded-full overflow-hidden flex-shrink-0" style={{ border: `2px solid ${SKY_DARK}` }}>
+                  <img src="/images/globe-icon.jpg" alt="Globe" className="w-full h-full object-cover" style={{ objectPosition: "center 30%" }} />
                 </div>
                 <div className="h-px w-12 bg-[#C9A84C]" />
               </div>
@@ -422,33 +439,96 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ═══════════════════════════════════════════ GALLERY ═══ */}
-      <section className="py-16 lg:py-20" style={{ backgroundColor: "#EDE3CC" }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* ═══════════════════════════════════════════ PHOTO GALLERY — 4 SUBSECTIONS ═══ */}
+      <section className="py-16 lg:py-24" style={{ backgroundColor: "#EDE3CC" }}>
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
+
+          {/* — Subsection 2: Kyrgyzstan + Hamilton Middle School — */}
           <FadeInSection>
-            <div className="flex flex-wrap justify-center gap-4">
-              {[
-                { src: "/images/peru-ollantaytambo.jpg", locale: "Ollantaytambo, Peru" },
-                { src: "/images/seattle-ingraham.jpg", locale: "Seattle, USA" },
-                { src: "/images/andijan-uzbekistan.jpg", locale: "Andijan, Uzbekistan" },
-              ].map((photo, i) => (
-                <div key={i} className="relative overflow-hidden rounded-sm shadow-md group" style={{ aspectRatio: "3/2", width: "clamp(260px, 30%, 420px)" }}>
-                  <img
-                    src={photo.src}
-                    alt={photo.locale}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#1A0E06]/70 via-transparent to-transparent" />
-                  <p
-                    className="absolute bottom-3 left-3 right-3 text-xs text-[#F5EDD6] leading-snug"
-                    style={{ fontFamily: "'Raleway', sans-serif", fontWeight: 500, letterSpacing: "0.04em" }}
-                  >
-                    {photo.locale}
-                  </p>
-                </div>
-              ))}
+            <div className="space-y-8">
+              {/* Kyrgyzstan image with caption */}
+              <div className="flex flex-col items-center">
+                <p className="text-sm font-semibold text-center text-black mb-3" style={{ fontFamily: "'Raleway', sans-serif", letterSpacing: "0.06em", textTransform: "uppercase" }}>Flag of Kyrgyzstan</p>
+                <img
+                  src="/images/kyrgyzstan-cf-options.jpg"
+                  alt="Flag of Kyrgyzstan with Companion Flag stripe options"
+                  className="rounded-sm shadow-xl max-w-xl w-full"
+                  style={{ border: "6px solid white" }}
+                />
+              </div>
+              {/* Hamilton Middle School image */}
+              <div className="flex justify-center">
+                <img
+                  src="/images/hamilton-middle-school.jpg"
+                  alt="Hamilton International Middle School CF Assembly"
+                  className="rounded-sm shadow-xl max-w-md w-full"
+                  style={{ border: "6px solid white" }}
+                />
+              </div>
             </div>
           </FadeInSection>
+
+          {/* — Subsection 3: CF Interpretive Sign + CF Pins — */}
+          <FadeInSection delay={100}>
+            <div className="flex flex-col lg:flex-row gap-8 items-start">
+              {/* CF Sign — top/left, no white border */}
+              <div className="flex-shrink-0 w-full lg:w-1/2">
+                <img
+                  src="/images/cf-interpretive-sign.jpg"
+                  alt="The Companion Flag interpretive sign"
+                  className="rounded-sm shadow-md w-full"
+                />
+              </div>
+              {/* CF Pins + host flag list — right column */}
+              <div className="flex-1 flex flex-col items-center gap-6">
+                <img
+                  src="/images/cf-pins-montage.jpg"
+                  alt="Companion Flag buttons and pins for various host flags"
+                  className="w-48 object-contain"
+                />
+                <div>
+                  <p className="text-sm font-semibold text-[#3D2B1F] mb-3" style={{ fontFamily: "'Raleway', sans-serif", letterSpacing: "0.05em", textTransform: "uppercase" }}>The CF flies below any flag:</p>
+                  <ul className="grid grid-cols-2 gap-x-6 gap-y-1" style={{ fontFamily: "'Lora', Georgia, serif", fontSize: "0.9rem", color: "#5C4033" }}>
+                    {[
+                      "National flags", "State & provincial flags",
+                      "Tribal & indigenous flags", "Religious flags",
+                      "University flags", "Business flags",
+                      "Sports team flags", "Interest group flags",
+                      "Municipal flags", "Military flags",
+                    ].map((item, i) => (
+                      <li key={i} className="flex items-center gap-2">
+                        <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ backgroundColor: "#3CCDFC" }} />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </FadeInSection>
+
+          {/* — Subsection 4: Uzbekistan teenagers + Kids on stage — */}
+          <FadeInSection delay={150}>
+            <div className="space-y-8">
+              <div className="flex justify-center">
+                <img
+                  src="/images/andijan-uzbekistan.jpg"
+                  alt="Teenagers in Uzbekistan holding their new Companion Flag outside their school"
+                  className="rounded-sm shadow-xl max-w-2xl w-full"
+                  style={{ border: "6px solid white" }}
+                />
+              </div>
+              <div className="flex justify-center">
+                <img
+                  src="/images/kidsonstage.jpg"
+                  alt="Elementary school children on stage proudly holding their art-project national flags and Companion Flags"
+                  className="rounded-sm shadow-xl max-w-2xl w-full"
+                  style={{ border: "6px solid white" }}
+                />
+              </div>
+            </div>
+          </FadeInSection>
+
         </div>
       </section>
 

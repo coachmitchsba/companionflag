@@ -4,6 +4,7 @@
 import { Link } from "wouter";
 import { Mail, ExternalLink } from "lucide-react";
 
+
 export default function Footer() {
   return (
     <footer className="bg-[#2A1F15] text-[#E8D8B8]">
@@ -15,11 +16,8 @@ export default function Footer() {
           {/* Brand */}
           <div>
             <div className="flex items-center gap-3 mb-4">
-              <div className="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0" style={{ backgroundColor: "#3CCDFC", border: "2px solid #1AAAD4" }}>
-                <div className="flex flex-col items-center gap-0.5">
-                  <div className="w-6 h-2.5 bg-white rounded-sm" />
-                  <div className="w-6 h-1.5 bg-[#C9A84C] rounded-sm" />
-                </div>
+              <div className="w-10 h-10 rounded-full flex-shrink-0 overflow-hidden" style={{ border: "2px solid #1AAAD4" }}>
+                <img src="/images/globe-icon.jpg" alt="Globe" className="w-full h-full object-cover" style={{ objectPosition: "center 30%" }} />
               </div>
               <div
                 className="text-xl text-[#F5EDD6]"

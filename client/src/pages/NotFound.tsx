@@ -4,6 +4,7 @@ import { Link } from "wouter";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 
+
 export default function NotFound() {
   return (
     <div className="min-h-screen flex flex-col" style={{ backgroundColor: "#F5EDD6" }}>
@@ -12,11 +13,8 @@ export default function NotFound() {
         <div className="text-center max-w-lg">
           <div className="inline-flex items-center gap-2 mb-6">
             <div className="h-px w-12 bg-[#C9A84C]" />
-            <div className="w-8 h-8 rounded-full bg-[#87CEEB] border-2 border-[#5BA3C9] flex items-center justify-center">
-              <div className="flex flex-col items-center gap-0.5">
-                <div className="w-4 h-1.5 bg-white rounded-sm" />
-                <div className="w-4 h-1 bg-[#C9A84C] rounded-sm" />
-              </div>
+            <div className="w-8 h-8 rounded-full overflow-hidden flex-shrink-0" style={{ border: "2px solid #5BA3C9" }}>
+              <img src="/images/globe-icon.jpg" alt="Globe" className="w-full h-full object-cover" style={{ objectPosition: "center 30%" }} />
             </div>
             <div className="h-px w-12 bg-[#C9A84C]" />
           </div>

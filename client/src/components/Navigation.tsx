@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
 import { Menu, X } from "lucide-react";
 
+
 const navLinks = [
   { href: "/", label: "Home" },
   { href: "/about", label: "About the CF" },
@@ -46,12 +47,9 @@ export default function Navigation() {
           {/* Wordmark */}
           <Link href="/">
             <div className="flex items-center gap-3 group">
-              {/* CF Badge icon */}
-              <div className="w-9 h-9 rounded-full flex items-center justify-center shadow-sm flex-shrink-0" style={{ backgroundColor: "#3CCDFC", border: "2px solid #1AAAD4" }}>
-                <div className="flex flex-col items-center gap-0.5">
-                  <div className="w-5 h-2 bg-white rounded-sm border border-[#5BA3C9]/30" />
-                  <div className="w-5 h-1 bg-[#C9A84C] rounded-sm" />
-                </div>
+              {/* Globe icon */}
+              <div className="w-9 h-9 rounded-full shadow-sm flex-shrink-0 overflow-hidden" style={{ border: "2px solid #1AAAD4" }}>
+                <img src="/images/globe-icon.jpg" alt="Globe" className="w-full h-full object-cover" style={{ objectPosition: "center 30%" }} />
               </div>
               <div>
                 <div
