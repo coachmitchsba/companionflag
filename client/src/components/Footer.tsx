@@ -67,14 +67,11 @@ export default function Footer() {
               {[
                 { href: "/", label: "Home" },
                 { href: "/news", label: "News & Updates" },
-                { href: "/self-test", label: "Is this idea for you?" },
-                { href: "/share", label: "Share the Idea!" },
                 { href: "/how-to-acquire", label: "Acquire a CF" },
-                { href: "/ambassadors", label: "CF Ambassadors" },
-                { href: "/origination", label: "Points of Origination" },
-                { href: "/resources", label: "Resources & Links" },
-                { href: "/history", label: "History" },
-                { href: "/faq", label: "Frequently Asked Questions" },
+                { href: "/cf-spec-sheet", label: "CF Spec Sheet" },
+                { href: "/host-flags", label: "Host Flags" },
+                { href: "/faq", label: "FAQ" },
+                { href: "/contact", label: "Contact" },
               ].map((link) => (
                 <Link key={link.href} href={link.href}>
                   <span
