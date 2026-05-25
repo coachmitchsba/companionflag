@@ -68,21 +68,30 @@ export default function Footer() {
                 { href: "/", label: "Home" },
                 { href: "/news", label: "News & Updates" },
                 { href: "/how-to-acquire", label: "Acquire a CF" },
-                { href: "/cf-spec-sheet", label: "CF Spec Sheet" },
-                { href: "/host-flags", label: "Host Flags" },
+                { href: "/images/cf-spec-sheet.pdf", label: "CF Spec Sheet", external: true },
+                { href: "/wall-of-flags", label: "Host Flags" },
                 { href: "/faq", label: "FAQ" },
                 { href: "/contact", label: "Contact" },
               ].map((link) => (
-                <Link key={link.href} href={link.href}>
-                  <span
+                (link as any).external ? (
+                  <a key={link.href} href={link.href} target="_blank" rel="noopener noreferrer"
                     className="text-sm text-[#B8A890] transition-colors cursor-pointer"
+                    style={{ fontFamily: "'Raleway', sans-serif", textDecoration: "none" }}
                     onMouseEnter={e => (e.currentTarget.style.color = '#3CCDFC')}
                     onMouseLeave={e => (e.currentTarget.style.color = '')}
-                    style={{ fontFamily: "'Raleway', sans-serif" }}
-                  >
-                    {link.label}
-                  </span>
-                </Link>
+                  >{link.label}</a>
+                ) : (
+                  <Link key={link.href} href={link.href}>
+                    <span
+                      className="text-sm text-[#B8A890] transition-colors cursor-pointer"
+                      onMouseEnter={e => (e.currentTarget.style.color = '#3CCDFC')}
+                      onMouseLeave={e => (e.currentTarget.style.color = '')}
+                      style={{ fontFamily: "'Raleway', sans-serif" }}
+                    >
+                      {link.label}
+                    </span>
+                  </Link>
+                )
               ))}
             </nav>
           </div>

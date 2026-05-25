@@ -15,8 +15,8 @@ const allLinks = [
   { href: "/", label: "Home" },
   { href: "/news", label: "News & Updates" },
   { href: "/how-to-acquire", label: "Acquire a CF" },
-  { href: "/cf-spec-sheet", label: "CF Spec Sheet" },
-  { href: "/host-flags", label: "Host Flags" },
+  { href: "/images/cf-spec-sheet.pdf", label: "CF Spec Sheet", external: true },
+  { href: "/wall-of-flags", label: "Host Flags" },
   { href: "/faq", label: "FAQ" },
   { href: "/contact", label: "Contact" },
 ];
@@ -139,27 +139,30 @@ export default function Navigation() {
                   style={{ backgroundColor: "#F5EDD6", zIndex: 100 }}
                 >
                   {dropdownLinks.map(link => (
-                    <Link key={link.href} href={link.href}>
-                      <span
+                    (link as any).external ? (
+                      <a key={link.href} href={link.href} target="_blank" rel="noopener noreferrer"
                         className="block px-4 py-2.5 text-sm transition-colors cursor-pointer"
-                        style={{
-                          fontFamily: "'Raleway', sans-serif",
-                          fontWeight: location === link.href ? 600 : 400,
-                          color: location === link.href ? SKY : "#3D2B1F",
-                          backgroundColor: location === link.href ? "#EDE3CC" : "transparent",
-                        }}
-                        onMouseEnter={e => {
-                          (e.currentTarget as HTMLElement).style.backgroundColor = "#EDE3CC";
-                          (e.currentTarget as HTMLElement).style.color = SKY;
-                        }}
-                        onMouseLeave={e => {
-                          (e.currentTarget as HTMLElement).style.backgroundColor = location === link.href ? "#EDE3CC" : "transparent";
-                          (e.currentTarget as HTMLElement).style.color = location === link.href ? SKY : "#3D2B1F";
-                        }}
-                      >
-                        {link.label}
-                      </span>
-                    </Link>
+                        style={{ fontFamily: "'Raleway', sans-serif", fontWeight: 400, color: "#3D2B1F", textDecoration: "none" }}
+                        onMouseEnter={e => { (e.currentTarget as HTMLElement).style.backgroundColor = "#EDE3CC"; (e.currentTarget as HTMLElement).style.color = SKY; }}
+                        onMouseLeave={e => { (e.currentTarget as HTMLElement).style.backgroundColor = "transparent"; (e.currentTarget as HTMLElement).style.color = "#3D2B1F"; }}
+                      >{link.label}</a>
+                    ) : (
+                      <Link key={link.href} href={link.href}>
+                        <span
+                          className="block px-4 py-2.5 text-sm transition-colors cursor-pointer"
+                          style={{
+                            fontFamily: "'Raleway', sans-serif",
+                            fontWeight: location === link.href ? 600 : 400,
+                            color: location === link.href ? SKY : "#3D2B1F",
+                            backgroundColor: location === link.href ? "#EDE3CC" : "transparent",
+                          }}
+                          onMouseEnter={e => { (e.currentTarget as HTMLElement).style.backgroundColor = "#EDE3CC"; (e.currentTarget as HTMLElement).style.color = SKY; }}
+                          onMouseLeave={e => { (e.currentTarget as HTMLElement).style.backgroundColor = location === link.href ? "#EDE3CC" : "transparent"; (e.currentTarget as HTMLElement).style.color = location === link.href ? SKY : "#3D2B1F"; }}
+                        >
+                          {link.label}
+                        </span>
+                      </Link>
+                    )
                   ))}
                 </div>
               )}
@@ -184,21 +187,27 @@ export default function Navigation() {
         <div className="lg:hidden bg-[#F5EDD6] border-t border-[#D4C4A0] shadow-lg">
           <nav className="max-w-7xl mx-auto px-4 py-3 flex flex-col gap-1">
             {allLinks.map(link => (
-              <Link key={link.href} href={link.href}>
-                <span
-                  className={`block px-3 py-2.5 text-sm rounded transition-colors cursor-pointer ${
-                    location === link.href ? "bg-[#E8D8B8] font-semibold" : "text-[#5C4033] hover:bg-[#EDE3CC]"
-                  }`}
-                  style={{
-                    fontFamily: "'Raleway', sans-serif",
-                    color: location === link.href ? SKY : undefined,
-                  }}
-                  onMouseEnter={e => { if (location !== link.href) (e.currentTarget as HTMLElement).style.color = SKY; }}
-                  onMouseLeave={e => { if (location !== link.href) (e.currentTarget as HTMLElement).style.color = ""; }}
-                >
-                  {link.label}
-                </span>
-              </Link>
+              (link as any).external ? (
+                <a key={link.href} href={link.href} target="_blank" rel="noopener noreferrer"
+                  className="block px-3 py-2.5 text-sm rounded transition-colors cursor-pointer text-[#5C4033] hover:bg-[#EDE3CC]"
+                  style={{ fontFamily: "'Raleway', sans-serif", textDecoration: "none" }}
+                  onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = SKY; }}
+                  onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = ""; }}
+                >{link.label}</a>
+              ) : (
+                <Link key={link.href} href={link.href}>
+                  <span
+                    className={`block px-3 py-2.5 text-sm rounded transition-colors cursor-pointer ${
+                      location === link.href ? "bg-[#E8D8B8] font-semibold" : "text-[#5C4033] hover:bg-[#EDE3CC]"
+                    }`}
+                    style={{ fontFamily: "'Raleway', sans-serif", color: location === link.href ? SKY : undefined }}
+                    onMouseEnter={e => { if (location !== link.href) (e.currentTarget as HTMLElement).style.color = SKY; }}
+                    onMouseLeave={e => { if (location !== link.href) (e.currentTarget as HTMLElement).style.color = ""; }}
+                  >
+                    {link.label}
+                  </span>
+                </Link>
+              )
             ))}
           </nav>
         </div>
