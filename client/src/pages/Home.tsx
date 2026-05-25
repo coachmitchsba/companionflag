@@ -67,22 +67,20 @@ function ZoomablePhoto({ src, alt }: { src: string; alt: string }) {
       </div>
       {zoomed && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-sm cursor-zoom-out"
+          style={{ position: 'fixed', inset: 0, zIndex: 9999, display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: 'rgba(0,0,0,0.88)', cursor: 'zoom-out' }}
           onClick={() => setZoomed(false)}
         >
-          <div className="relative max-w-5xl w-full mx-4">
+          <div style={{ position: 'relative', maxWidth: '90vw', width: '100%' }} onClick={e => e.stopPropagation()}>
             <button
               onClick={() => setZoomed(false)}
-              className="absolute -top-10 right-0 text-white/80 hover:text-white text-sm flex items-center gap-1 transition-colors"
-              style={{ fontFamily: "'Raleway', sans-serif" }}
+              style={{ position: 'absolute', top: '-2.5rem', right: 0, color: 'rgba(255,255,255,0.85)', background: 'none', border: 'none', cursor: 'pointer', fontSize: '1rem', fontFamily: "'Raleway', sans-serif" }}
             >
               Close ✕
             </button>
             <img
               src={src}
               alt={alt}
-              className="w-full h-auto rounded-sm shadow-2xl"
-              style={{ border: "6px solid white" }}
+              style={{ width: '100%', height: 'auto', border: '6px solid white', borderRadius: '2px', boxShadow: '0 25px 60px rgba(0,0,0,0.6)', display: 'block' }}
             />
           </div>
         </div>
