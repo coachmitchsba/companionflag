@@ -409,27 +409,58 @@ export default function WallOfFlags() {
             </p>
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-5 items-center justify-items-center">
-            {[
-              { src: "/images/stickers/costa-rica.png", label: "Costa Rica" },
-              { src: "/images/stickers/croatia.png", label: "Croatia" },
-              { src: "/images/stickers/cuba.png", label: "Cuba" },
-            ].map((badge, i) => (
-              <div key={i} className="flex flex-col items-center gap-2 group">
-                <div className="w-28 h-28 rounded-full overflow-hidden shadow-md group-hover:shadow-lg transition-shadow border-2" style={{ borderColor: "#D4C4A0" }}>
-                  <img src={badge.src} alt={`${badge.label} Companion Flag badge`} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+            {([
+              { iso2: "cr", name: "Costa Rica", stripe: "#002B7F" },
+              { iso2: "hr", name: "Croatia", stripe: "#FF0000" },
+              { iso2: "cu", name: "Cuba", stripe: "#002A8F" },
+              { iso2: "us", name: "United States", stripe: "#B22234" },
+              { iso2: "gb", name: "United Kingdom", stripe: "#012169" },
+              { iso2: "fr", name: "France", stripe: "#002395" },
+              { iso2: "de", name: "Germany", stripe: "#000000" },
+              { iso2: "jp", name: "Japan", stripe: "#BC002D" },
+              { iso2: "br", name: "Brazil", stripe: "#009C3B" },
+              { iso2: "in", name: "India", stripe: "#FF9933" },
+              { iso2: "mx", name: "Mexico", stripe: "#006847" },
+              { iso2: "au", name: "Australia", stripe: "#00008B" },
+              { iso2: "ca", name: "Canada", stripe: "#FF0000" },
+              { iso2: "za", name: "South Africa", stripe: "#007A4D" },
+              { iso2: "ng", name: "Nigeria", stripe: "#008751" },
+              { iso2: "ke", name: "Kenya", stripe: "#006600" },
+              { iso2: "ua", name: "Ukraine", stripe: "#005BBB" },
+              { iso2: "kg", name: "Kyrgyzstan", stripe: "#E8112D" },
+              { iso2: "uz", name: "Uzbekistan", stripe: "#1EB53A" },
+              { iso2: "ar", name: "Argentina", stripe: "#74ACDF" },
+              { iso2: "cl", name: "Chile", stripe: "#D52B1E" },
+              { iso2: "pe", name: "Peru", stripe: "#D91023" },
+              { iso2: "nz", name: "New Zealand", stripe: "#00247D" },
+              { iso2: "se", name: "Sweden", stripe: "#006AA7" },
+            ] as { iso2: string; name: string; stripe: string }[]).map((badge) => {
+              const alpha3 = Object.keys(flagData).find(k => (flagData as Record<string, FlagEntry>)[k].iso2.toLowerCase() === badge.iso2);
+              const entry = alpha3 ? (flagData as Record<string, FlagEntry>)[alpha3] : null;
+              return (
+                <div
+                  key={badge.iso2}
+                  className="flex flex-col items-center gap-2 group cursor-pointer"
+                  onClick={() => { if (entry && alpha3) setSelected({ code: alpha3, entry }); }}
+                >
+                  <div className="w-28 h-28 rounded-full overflow-hidden shadow-md group-hover:shadow-lg transition-all duration-300 group-hover:scale-105 border-2" style={{ borderColor: "#D4C4A0" }}>
+                    {/* Top 65%: national flag */}
+                    <div style={{ height: "65%", overflow: "hidden" }}>
+                      <img
+                        src={`https://flagcdn.com/w160/${badge.iso2}.png`}
+                        alt={badge.name}
+                        style={{ width: "100%", height: "154%", objectFit: "cover", objectPosition: "center top" }}
+                      />
+                    </div>
+                    {/* Bottom 35%: white CF with colored stripe */}
+                    <div style={{ height: "35%", backgroundColor: "#FFFFFF", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                      <div style={{ width: "80%", height: "40%", backgroundColor: badge.stripe, borderRadius: 2 }} />
+                    </div>
+                  </div>
+                  <span className="text-xs text-[#8B6E4E] text-center" style={{ fontFamily: "'Raleway', sans-serif", fontWeight: 500 }}>{badge.name}</span>
                 </div>
-                <span className="text-xs text-[#8B6E4E] text-center" style={{ fontFamily: "'Raleway', sans-serif", fontWeight: 500 }}>{badge.label}</span>
-              </div>
-            ))}
-            {/* Placeholder slots for upcoming badges */}
-            {Array.from({ length: 9 }).map((_, i) => (
-              <div key={`placeholder-${i}`} className="flex flex-col items-center gap-2">
-                <div className="w-28 h-28 rounded-full flex items-center justify-center border-2 border-dashed" style={{ borderColor: "#D4C4A0", backgroundColor: "#EDE3CC" }}>
-                  <Globe size={28} className="text-[#C4B090]" />
-                </div>
-                <span className="text-xs text-[#C4B090] text-center" style={{ fontFamily: "'Raleway', sans-serif" }}>Coming soon</span>
-              </div>
-            ))}
+              );
+            })}
           </div>
           <p className="text-center text-sm text-[#8B6E4E] mt-8 italic" style={{ fontFamily: "'Lora', Georgia, serif" }}>
             Have a CF badge to share? <a href="mailto:info@companionflag.org" className="text-[#5BA3C9] hover:underline">Send it to us</a> and we'll add it here.
