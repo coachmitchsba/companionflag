@@ -1,7 +1,6 @@
 /* Home Page — Companion Flag "Warm Globe" Design
    Old-world map fixed background throughout (hero → Is This Idea For You?).
    Four subsections per client spec, then Is This Idea For You? in dark mountain-blue, then Footer.
-   Mountain dark blue from hero photo: #2C4A3E
    Sky blue accent: #3CCDFC | Dark sky: #1AAAD4
    Parchment: #F5EDD6 | Warm brown text: #3D2B1F */
 
@@ -12,7 +11,7 @@ import Footer from "@/components/Footer";
 import DefinitionPopup from "@/components/DefinitionPopup";
 
 const OLD_WORLD_MAP = "/manus-storage/cf-hero-v2_cdce503b.jpg";
-const MOUNTAIN_BLUE = "#2C4A3E";
+const MOUNTAIN_BLUE = "#3CCDFC";
 const SKY = "#3CCDFC";
 const SKY_DARK = "#1AAAD4";
 
@@ -116,7 +115,7 @@ export default function Home() {
       {/* ══════════════════════════════════════════════════════════════════════
           SECTION 1 — HERO
       ══════════════════════════════════════════════════════════════════════ */}
-      <section className="relative z-10 min-h-screen flex items-center pt-16">
+      <section className="relative z-10 flex items-center pt-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-28 w-full">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             {/* Left: text */}
@@ -383,7 +382,7 @@ export default function Home() {
       {/* ══════════════════════════════════════════════════════════════════════
           IS THIS IDEA FOR YOU? — dark mountain-blue background, distinct from footer
       ══════════════════════════════════════════════════════════════════════ */}
-      <section className="relative z-10 py-20 lg:py-24" style={{ backgroundColor: MOUNTAIN_BLUE }}>
+      <section className="relative z-10 py-20 lg:py-24" style={{ backgroundColor: "#1E3A5F" }}>
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <FadeInSection>
             <h2 className="text-4xl sm:text-5xl text-[#F5EDD6] mb-6 leading-tight" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontWeight: 500 }}>
