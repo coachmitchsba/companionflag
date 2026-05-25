@@ -17,7 +17,7 @@ export default function Footer() {
           <div>
             <div className="flex items-center gap-3 mb-4">
               <div className="w-10 h-10 rounded-full flex-shrink-0 overflow-hidden" style={{ border: "2px solid #1AAAD4" }}>
-                <img src="/images/globe-icon.jpg" alt="Globe" className="w-full h-full object-cover" style={{ objectPosition: "center 30%" }} />
+                <img src="/images/globe-icon.jpg" alt="Globe" className="w-full h-full object-cover" style={{ objectPosition: "center 45%" }} />
               </div>
               <div
                 className="text-xl text-[#F5EDD6]"

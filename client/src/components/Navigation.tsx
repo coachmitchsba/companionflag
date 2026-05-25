@@ -49,7 +49,7 @@ export default function Navigation() {
             <div className="flex items-center gap-3 group">
               {/* Globe icon */}
               <div className="w-9 h-9 rounded-full shadow-sm flex-shrink-0 overflow-hidden" style={{ border: "2px solid #1AAAD4" }}>
-                <img src="/images/globe-icon.jpg" alt="Globe" className="w-full h-full object-cover" style={{ objectPosition: "center 30%" }} />
+                <img src="/images/globe-icon.jpg" alt="Globe" className="w-full h-full object-cover" style={{ objectPosition: "center 45%" }} />
               </div>
               <div>
                 <div

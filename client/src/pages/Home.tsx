@@ -167,7 +167,7 @@ export default function Home() {
       </section>
 
       {/* ═══════════════════════════════════════════ WHAT IS CF — single column ═══ */}
-      <section className="py-20 lg:py-28" style={{ backgroundColor: "#F5EDD6" }}>
+      <section className="pt-10 pb-20 lg:pt-12 lg:pb-28" style={{ backgroundColor: "#F5EDD6" }}>
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <FadeInSection>
             <div className="text-center mb-12">
@@ -417,7 +417,7 @@ export default function Home() {
               <div className="inline-flex items-center gap-3 mb-6">
                 <div className="h-px w-12 bg-[#C9A84C]" />
                 <div className="w-8 h-8 rounded-full overflow-hidden flex-shrink-0" style={{ border: `2px solid ${SKY_DARK}` }}>
-                  <img src="/images/globe-icon.jpg" alt="Globe" className="w-full h-full object-cover" style={{ objectPosition: "center 30%" }} />
+                  <img src="/images/globe-icon.jpg" alt="Globe" className="w-full h-full object-cover" style={{ objectPosition: "center 45%" }} />
                 </div>
                 <div className="h-px w-12 bg-[#C9A84C]" />
               </div>

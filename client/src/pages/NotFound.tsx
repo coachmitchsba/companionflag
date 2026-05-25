@@ -14,7 +14,7 @@ export default function NotFound() {
           <div className="inline-flex items-center gap-2 mb-6">
             <div className="h-px w-12 bg-[#C9A84C]" />
             <div className="w-8 h-8 rounded-full overflow-hidden flex-shrink-0" style={{ border: "2px solid #5BA3C9" }}>
-              <img src="/images/globe-icon.jpg" alt="Globe" className="w-full h-full object-cover" style={{ objectPosition: "center 30%" }} />
+              <img src="/images/globe-icon.jpg" alt="Globe" className="w-full h-full object-cover" style={{ objectPosition: "center 45%" }} />
             </div>
             <div className="h-px w-12 bg-[#C9A84C]" />
           </div>
